@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{ useState } from "react";
+import { Container, Navbar, Row, Col } from "react-bootstrap";
+import AddEmp from "./components/AddEmp";
+import EmpList from './components/EmpList';
+import "./App.css"
 
 function App() {
+  const [empId, setEmpId] = useState("");
+
+  const getEmpHandler = (id) => {
+    console.log("The ID of document to be edited: ", id);
+    setEmpId(id);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark" className="header">
+        <Container>
+          <Navbar.Brand href="#home"  className="logo">Employee CRUD</Navbar.Brand>
+        </Container>
+      </Navbar>
+      <br></br>
+      <Container style={{ width: "400px" }}>
+        <Row>
+          <Col>
+            <AddEmp id={empId} setId={setEmpId} />
+          </Col>
+        </Row>
+      </Container>
+      <br></br>
+      <br></br>
+      <Container>
+        <Row>
+          <Col>
+            <EmpList getEmpId={getEmpHandler} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 
